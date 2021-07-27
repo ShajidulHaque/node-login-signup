@@ -1,0 +1,76 @@
+<%- include('./partials/header.ejs'); %>
+	<div class="signup">
+		<div class="container">
+			<h1>Sign Up</h1>
+			<div class="main_signup">
+				<form action="">
+					<p>Username</p>
+					<input type="name" name="name" id="input" placeholder="" />
+					<p>Email Address</p>
+					<input type="email" name="email" id="input" placeholder="" />
+					<p>Phone Number</p>
+					<input type="number" name="phone" id="input" placeholder="" />
+					<p>Password</p>
+					<input type="password" name="password" id="input" placeholder="" />
+					<input type="submit" id="btn" />
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" charset="utf-8">
+		
+		const form = document.querySelector('form');
+		const btn = document.querySelector('#btn');
+		
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			
+			const arr = [];
+			const input = document.querySelectorAll('#input')
+				.forEach((item) => {
+					if(item.value) {
+						arr.push(item.value)
+					} else {
+						
+					}
+				})
+			
+			if( arr.length == 4) {
+				btn.value = "submitting...";
+				
+				const response = await fetch('/signup', {
+					method: 'POST',
+					headers: {
+						'Content-type': 'application/json'
+					},
+					body: JSON.stringify({
+						username: arr[0],
+						email: arr[1],
+						phone: arr[2],
+						password: arr[3]
+					})
+				});
+				
+				const data = await response.json();
+				
+				if(data.error) {
+					btn.innerHTML = "submit"
+					alert(data.error)
+					location.reload();
+				} else {
+					alert("Signup successful!")
+					location.replace('/login')
+				}
+				
+			} else {
+				alert('Complete you fild!')
+			}
+		})
+		
+	</script>
+	
+  <!-- Project -->
+  <script src="main.js"></script>
+</body>
+</html>
