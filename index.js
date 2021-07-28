@@ -2,9 +2,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
-const dotenv = require('dotenv');
 const ejs = require('ejs');
 const path = require('path');
+
+// configure environment variable
+if (process.env.NODE_ENV !== 'production') {
+	const dotenv = require('dotenv');
+	dotenv.config();
+}
 
 // internal imports
 const { notFoundHandler, commonErrorHandler } = require('./middlewares/common/errorHandler');
@@ -15,7 +20,9 @@ const Test = require('./model/people.js')
 
 // app object
 const app = express();
-dotenv.config();
+
+// server port
+const port = process.env.PORT || 5000;
 
 // database connection
 mongoose
@@ -51,7 +58,6 @@ app.use(notFoundHandler);
 app.use(commonErrorHandler);
 
 // listining our server
-app.listen(process.env.PORT, () => {
-	console.log(`listening on port ${process.env.PORT}`);
+app.listen(port, () => {
+	console.log(`listening on port ${port}`);
 });
-
