@@ -11,6 +11,7 @@ const commonErrorHandler = (err, req, res, next) => {
 	if(res.locals.html) {
 		res.render('error', {
 			error: err.message,
+			status: res.status
 		});
 	} else {
 		res.json({
