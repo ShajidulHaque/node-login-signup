@@ -47,9 +47,9 @@ app.set('view engine', 'ejs');
 app.use(cookieParser(process.env.COOKI_SECRIT))
 
 // create router
-app.use('/', homeRouter);
+app.use('/home', homeRouter);
 app.use('/login', loginRouter);
-app.use('/signup', signupRouter);
+app.use('/', signupRouter);
 
 // 404 not found error handler
 app.use(notFoundHandler);

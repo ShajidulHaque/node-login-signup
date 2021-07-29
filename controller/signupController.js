@@ -8,6 +8,7 @@ const User = require('../model/people.js');
 const getSignupPage = (req, res) => {
 	res.render('signup', {
 		signup: false,
+		title: 'fullstack - signup - page'
 	});
 }
 

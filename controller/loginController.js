@@ -7,7 +7,9 @@ const User = require('../model/people.js');
 
 // login controller
 const getLoginPage = (req, res) => {
-	res.render('login');
+	res.render('login', {
+		title: 'fullstack login - page'
+	});
 }
 
 // do login
